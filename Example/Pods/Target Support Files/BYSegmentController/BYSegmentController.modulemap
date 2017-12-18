@@ -1,0 +1,6 @@
+framework module BYSegmentController {
+  umbrella header "BYSegmentController-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,16 @@
+PODS:
+  - BYSegmentController (0.1.0)
+
+DEPENDENCIES:
+  - BYSegmentController (from `../`)
+
+EXTERNAL SOURCES:
+  BYSegmentController:
+    :path: ../
+
+SPEC CHECKSUMS:
+  BYSegmentController: 9a74f2592f788d991909c023ae4be487af70142e
+
+PODFILE CHECKSUM: fbae7ec50e6fb273a672b189bfbfba67918c24d2
+
+COCOAPODS: 1.3.1
