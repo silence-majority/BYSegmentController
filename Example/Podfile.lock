@@ -1,5 +1,7 @@
 PODS:
-  - BYSegmentController (0.1.0)
+  - BYSegmentController (0.1.0):
+    - Masonry
+  - Masonry (1.1.0)
 
 DEPENDENCIES:
   - BYSegmentController (from `../`)
@@ -9,7 +11,8 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  BYSegmentController: 9a74f2592f788d991909c023ae4be487af70142e
+  BYSegmentController: 8ee79c63bb0f776b342aa16ce5a9315cea19cb31
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
 
 PODFILE CHECKSUM: fbae7ec50e6fb273a672b189bfbfba67918c24d2
 

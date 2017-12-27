@@ -11,6 +11,7 @@
 #endif
 
 #import "BYSegmentController.h"
+#import "BYSegmentBadgeButton.h"
 #import "BYSegmentControl.h"
 
 FOUNDATION_EXPORT double BYSegmentControllerVersionNumber;
