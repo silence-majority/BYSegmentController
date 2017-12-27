@@ -17,8 +17,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _segmentControl = [[BYSegmentControl alloc] initWithFrame:CGRectMake(0, 64, [UIScreen mainScreen].bounds.size.width, 50) segmentTitles:@[@"我的老师",@"我的群组",@"我的同学"]];
+    self.view.backgroundColor = [UIColor lightGrayColor];
+    _segmentControl = [[BYSegmentControl alloc] initWithFrame:CGRectMake(0, 64, [UIScreen mainScreen].bounds.size.width, 50) segmentTitles:@[@"我的老师",@"我的群组",@"同学"]];
     _segmentControl.horizontalMargin = 25;
+    _segmentControl.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:_segmentControl];
 
                        

@@ -48,4 +48,18 @@
         _badgeLabel.hidden = true;
     }
 }
+
+- (void)setStyle:(BYSegmentBadgeButtonStyle)style{
+    _style = style;
+    switch (_style) {
+        case BYSegmentBadgeButtonStyleNormal:
+            [self setTitleColor:_normalTitleColor forState:UIControlStateNormal];
+            self.titleLabel.font = _normalTitleFont;
+            break;
+        case BYSegmentBadgeButtonStyleFocus:
+            [self setTitleColor:_focusTitleColor forState:UIControlStateNormal];
+            self.titleLabel.font = _focusTitleFont;
+            break;
+    }
+}
 @end

@@ -15,10 +15,10 @@ typedef NS_ENUM(NSInteger,BYSegmentControlSliderStyle){
 @interface BYSegmentControl : UIView
 @property (nonatomic,copy) NSArray<NSString *> *segmentTitles;
 @property (nonatomic,assign) CGFloat horizontalMargin;
-@property (nonatomic,strong) UIColor *normalColor;
-@property (nonatomic,strong) UIColor *focusColor;
-@property (nonatomic,strong) UIFont *normalFont;
-@property (nonatomic,strong) UIFont *focusFont;
+@property (nonatomic,strong) UIColor *normalSegmentColor;
+@property (nonatomic,strong) UIColor *focusSegmentColor;
+@property (nonatomic,strong) UIFont *normalSegmentFont;
+@property (nonatomic,strong) UIFont *focusSegmentFont;
 @property (nonatomic,assign) BYSegmentControlSliderStyle sliderStyle;
 @property (nonatomic,assign) CGSize sliderSize;
 
