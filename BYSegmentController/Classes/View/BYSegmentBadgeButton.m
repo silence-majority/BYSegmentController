@@ -23,6 +23,7 @@
     if(!_badgeLabel){
         UILabel *label = [[UILabel alloc] init];
         label.frame = CGRectMake(0, 0, 18, 18);
+        label.textAlignment = NSTextAlignmentCenter;
         label.clipsToBounds = true;
         label.layer.cornerRadius = 9;
         label.font = [UIFont systemFontOfSize:11];

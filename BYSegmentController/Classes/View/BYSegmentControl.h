@@ -6,6 +6,9 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol BYSegmentControlDelegate
+- (void)didSelecteSegmentIndex:(NSInteger)index;
+@end
 
 typedef NS_ENUM(NSInteger,BYSegmentControlSliderStyle){
     BYSegmentControlSliderStyleConstant = 0,
@@ -22,5 +25,9 @@ typedef NS_ENUM(NSInteger,BYSegmentControlSliderStyle){
 @property (nonatomic,assign) BYSegmentControlSliderStyle sliderStyle;
 @property (nonatomic,assign) CGSize sliderSize;
 
+@property (nonatomic,weak) id<BYSegmentControlDelegate> delegate;
+
 - (instancetype)initWithFrame:(CGRect)frame segmentTitles:(NSArray<NSString *> *)titles;
+- (void)updateSegmentWithRatio:(CGFloat)ratio;
+- (void)updateBadge:(NSInteger)badgeNumber forSegmentIndex:(NSInteger)index;
 @end

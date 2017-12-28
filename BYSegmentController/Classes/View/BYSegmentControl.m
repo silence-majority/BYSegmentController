@@ -16,6 +16,7 @@
 @property (nonatomic,assign) CGFloat segmentMaxWidth;
 @property (nonatomic,assign) CGFloat segmentInterSpace;
 @property (nonatomic,assign) NSInteger focusTag;
+@property (nonatomic,assign) NSInteger touchTag;
 
 @end
 
@@ -25,6 +26,7 @@
     if(self = [super initWithFrame:frame]){
         self.backgroundColor = [UIColor cyanColor];
       
+        _touchTag = -1;
         _baseTag = 1000;
         _sliderSize = CGSizeMake(30, 3);
         _focusTag = _baseTag;
@@ -43,6 +45,7 @@
             button.normalTitleColor = _normalSegmentColor;
             button.focusTitleColor = _focusSegmentColor;
             [button setTitle:_segmentTitles[i] forState:UIControlStateNormal];
+            button.titleLabel.textAlignment = NSTextAlignmentCenter;
             if (_focusTag == _baseTag+i){
                 [button setStyle:BYSegmentBadgeButtonStyleFocus];
             }else{
@@ -74,12 +77,56 @@
             make.left.offset(_horizontalMargin + (_segmentMaxWidth+_segmentInterSpace)*(i));
             make.centerY.offset(0);
             make.height.mas_equalTo(30);
+            make.width.mas_equalTo(_segmentMaxWidth);
         }];
     }
 }
 
-- (void)segmentButtonAction:(id)sender{
+- (void)segmentButtonAction:(BYSegmentBadgeButton *)sender{
+    _touchTag = sender.tag;
+    if (_delegate){
+        [_delegate didSelecteSegmentIndex:sender.tag-_baseTag];
+    }
     
+}
+
+- (void)updateSegmentWithRatio:(CGFloat)ratio{
+    //更新slider的位置,这个方法调用一次,slider的位置更新一次,使移动流畅
+    CGPoint center = _slider.center;
+    center.x = _horizontalMargin + _segmentMaxWidth/2 + (_segmentMaxWidth+_segmentInterSpace)*ratio;
+    _slider.center = center;
+    
+    //更新segmentButton的状态
+    CGFloat offset = ratio - (_focusTag-_baseTag);
+    if(fabs(offset) > 0.5){//只有offset达到一个临界点才去更行segmentButton的状态
+        if (_touchTag == -1){
+            NSInteger nextFocusTag = 0;
+            if (offset > 0){
+                nextFocusTag = _focusTag + 1;
+            }else{
+                nextFocusTag = _focusTag - 1;
+            }
+            BYSegmentBadgeButton *currentFocusButton = [self viewWithTag:_focusTag];
+            [currentFocusButton setStyle:BYSegmentBadgeButtonStyleNormal];
+            BYSegmentBadgeButton *nextFocusButton = [self viewWithTag:nextFocusTag];
+            [nextFocusButton setStyle:BYSegmentBadgeButtonStyleFocus];
+             _focusTag = nextFocusTag;//offset达到一个临界点后更新_focusTag,从而使这个零界条件消失.
+        }else{
+            if (fabs(ratio - (_touchTag-_baseTag)) < 0.5){
+                BYSegmentBadgeButton *currentFocusButton = [self viewWithTag:_focusTag];
+                [currentFocusButton setStyle:BYSegmentBadgeButtonStyleNormal];
+                BYSegmentBadgeButton *nextFocusButton = [self viewWithTag:_touchTag];
+                [nextFocusButton setStyle:BYSegmentBadgeButtonStyleFocus];
+                _focusTag = _touchTag;
+                _touchTag = -1;
+            }
+        }
+    }
+}
+
+- (void)updateBadge:(NSInteger)badgeNumber forSegmentIndex:(NSInteger)index{
+     BYSegmentBadgeButton *currentFocusButton = [self viewWithTag:_baseTag+index];
+    [currentFocusButton setBadgeNumber:badgeNumber];
 }
 
 #pragma mark - private
